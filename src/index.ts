@@ -1,5 +1,5 @@
 import data from './data.json';
-import { capitalize, convertDateString, since } from './utils'
+import { capitalize, convertDateString, since, formatPhone } from './utils'
 
 interface Customer {
     readonly id: number
@@ -48,7 +48,8 @@ function getAllCustomers(data: Customer[]): DisplayCustomer[] {
             purchased:  getPurchasedDate(c),
             // challenge 3
             lastPayment: since(c.lastpayment),
-            phone: ''
+            // challenge 4
+            phone: formatPhone(c.phone)
         }
         return customer
     })

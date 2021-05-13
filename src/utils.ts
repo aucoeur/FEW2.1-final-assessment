@@ -41,6 +41,10 @@ export function since(datestring: string): string {
 
 }
 
+export function formatPhone(phone: string): string {
+    return phone.length === 10 ? `(${phone.slice(0,3)}) ${phone.slice(3, 6)}-${phone.slice(6)}` : `+${phone}`
+}
+
 console.log(convertDateString("2018-04-03T18:13:55Z"))
 const yesterday = "2021-03-12"
 console.log(since(yesterday))

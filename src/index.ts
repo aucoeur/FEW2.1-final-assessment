@@ -1,4 +1,5 @@
 import data from './data.json';
+import { capitalize, convertDateString } from './utils'
 
 interface Customer {
     readonly id: number
@@ -12,23 +13,44 @@ interface Customer {
     readonly city: string
 }
 
-function capitalize(word: string): string {
-    return word[0].toUpperCase() + word.slice(1)
+interface DisplayCustomer {
+    name: string
+    purchased: string
+    lastPayment: string
+    phone: string
 }
 
+// challenge 1
 function getFirstName(customer: Customer): string {
     return capitalize(customer.first_name)
 }
 
-const getLastName = (customer: Customer): string => {
+function getLastName(customer: Customer): string {
     return capitalize(customer.last_name)
 }
 
-function getAllNames(data: Customer[]): string[] {
-    const names = data.map(customer  => {
-        return `${getFirstName(customer)} ${getLastName(customer)}`
-    })
-    return names
+function getFullName(customer: Customer): string {
+    return `${getFirstName(customer)} ${getLastName(customer)}`
 }
 
-console.log(getAllNames(data))
+
+// challenge 2
+
+const getPurchasedDate = (customer: Customer): string => {
+    return convertDateString(customer.purchased)
+}
+
+function getAllCustomers(data: Customer[]): DisplayCustomer[] {
+    const customers = data.map(c  => {
+        let customer: DisplayCustomer = {
+            name: getFullName(c),
+            purchased:  getPurchasedDate(c),
+            lastPayment: '',
+            phone: ''
+        }
+        return customer
+    })
+    return customers
+}
+
+console.log(getAllCustomers(data))

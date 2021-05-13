@@ -1,5 +1,5 @@
 import data from './data.json';
-import { capitalize, convertDateString } from './utils'
+import { capitalize, convertDateString, since } from './utils'
 
 interface Customer {
     readonly id: number
@@ -33,19 +33,21 @@ function getFullName(customer: Customer): string {
     return `${getFirstName(customer)} ${getLastName(customer)}`
 }
 
-
 // challenge 2
-
 const getPurchasedDate = (customer: Customer): string => {
     return convertDateString(customer.purchased)
 }
+
+
+
 
 function getAllCustomers(data: Customer[]): DisplayCustomer[] {
     const customers = data.map(c  => {
         let customer: DisplayCustomer = {
             name: getFullName(c),
             purchased:  getPurchasedDate(c),
-            lastPayment: '',
+            // challenge 3
+            lastPayment: since(c.lastpayment),
             phone: ''
         }
         return customer

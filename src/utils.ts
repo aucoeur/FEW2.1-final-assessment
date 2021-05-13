@@ -42,9 +42,24 @@ export function since(datestring: string): string {
 }
 
 export function formatPhone(phone: string): string {
-    return phone.length === 10 ? `(${phone.slice(0,3)}) ${phone.slice(3, 6)}-${phone.slice(6)}` : `+${phone}`
+
+    const digitsOnly: RegExp = /^\d+$/
+
+    if (!digitsOnly.test(phone)) {
+        return `this is not a phone number`
+    }
+    else if (phone.length === 10) {
+        return `(${phone.slice(0,3)}) ${phone.slice(3, 6)}-${phone.slice(6)}`
+    } else {
+        // If not valid 10 digit US number, split up into 3 char chunks anyway for easy reading
+
+        // regex checks for digits using positive lookahead per 3 digits
+        const regex = new RegExp(/\d{1,3}(?=(\d{3})*$)/g)
+        const chunk = phone.match(regex) || []
+        return chunk.join(' ')
+    }
 }
 
-console.log(convertDateString("2018-04-03T18:13:55Z"))
-const yesterday = "2021-03-12"
-console.log(since(yesterday))
+// console.log(convertDateString("2018-04-03T18:13:55Z"))
+// const yesterday = "2021-03-12"
+// console.log(since(yesterday))

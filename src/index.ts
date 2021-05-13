@@ -20,26 +20,24 @@ interface DisplayCustomer {
     phone: string
 }
 
+// woops this wasn't necessary
+// function getFirstName(customer: Customer): string {
+//     return capitalize(customer.first_name)
+// }
+
+// function getLastName(customer: Customer): string {
+//     return capitalize(customer.last_name)
+// }
+
 // challenge 1
-function getFirstName(customer: Customer): string {
-    return capitalize(customer.first_name)
-}
-
-function getLastName(customer: Customer): string {
-    return capitalize(customer.last_name)
-}
-
 function getFullName(customer: Customer): string {
-    return `${getFirstName(customer)} ${getLastName(customer)}`
+    return `${capitalize(customer.first_name)} ${capitalize(customer.last_name)}`
 }
 
-// challenge 2
+// challenge 2 - with arrow function
 const getPurchasedDate = (customer: Customer): string => {
     return convertDateString(customer.purchased)
 }
-
-
-
 
 function getAllCustomers(data: Customer[]): DisplayCustomer[] {
     const customers = data.map(c  => {
